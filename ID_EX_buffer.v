@@ -51,7 +51,7 @@ output reg out_memr;
 output reg out_alusrc;
 output reg out_[2:0] aluop;
 
-always @(posedge clock)
+  always @(negedge clock)
 begin
 out_imm = imm;
 out_rd = rd;
