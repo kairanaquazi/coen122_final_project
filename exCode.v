@@ -361,7 +361,7 @@ module exCode(clock, memWrite, memRead, ALUSRC, ALUOP, rd1, rd2, imm, readData, 
 
    dataMem dataMemInst(clock, memRead, memWrite, rd1, rd2, readData);
    
-   alu aluInst(aluA, rd1, ALUOP[0], 0, ALUOP[1], ALUOP[2], result, zero, neg);
+   alu aluInst(aluA, rd1, ALUOP[2], 0, ALUOP[1], ALUOP[0], result, zero, neg);
    
    always @(posedge clock) begin
    if(ALUSRC) begin 
