@@ -196,11 +196,12 @@ and(out[31],notsel,B[31]);
 
 endmodule
 //////////////////////////////////////////////////////////////////////////////////
-module mux31(sel, A, B, out);
+module mux31(neg, sel, A, B, out);
 
 input [1:0] sel;
 input [31:0] A;
 input [31:0] B;
+reg [31:0] temp;
 output [31:0] out;
 
 wire notsel1, notsel0, result1;
@@ -246,7 +247,10 @@ and(resulta[31],A[31],notsel1,notsel0);
 
 and(result1,1,notsel1,sel[0]);
 
-negateA negateB_call(B,negativeB);
+
+if(neg) begin temp=B; end else begin temp=A; end
+
+negateA negateB_call(temp,negativeB);
 
 
 and(resultnegb[0],negativeB[0],sel[1],notsel0);
@@ -336,7 +340,7 @@ wire [31:0] result_31mux;
 not(not_sub, sub);
 and(select[0], inc, not_sub);
 nor(select[1], add, inc);
-mux31 mux31_call(select, A, B, result_31mux);
+mux31 mux31_call(neg, select, A, B, result_31mux);
 
 mux21 mux21_call(neg, B, result_21mux);
 
