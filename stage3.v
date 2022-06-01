@@ -48,15 +48,15 @@ module stage3(clock, memWrite, memRead, ALUSRC, ALUOP, rd1, rd2, imm, regWrite, 
     output [5:0] out_rd;
     output [31:0] muxOut;
     
-    wire readData1;
-    wire ALUResult1;
+    wire [31:0] readData1;
+    wire [31:0] ALUResult1;
    
     exCode exCodeInst(clock, memWrite, memRead, ALUSRC, ALUOP, rd1, rd2, imm, readData1, ALUResult1, zero, neg);
     
     wire WAI2, memRead2;
     wire [31:0] PC2, readData2, ALUResult2;
     
-    EX_WB_buffer EX_WB_bufferInst(clock, regWrite, WAI, memRead, PC, readData1, ALUResult1, rd, out_regWrite, WAI2, memRead2, PC2, readData2, ALUResult2, out_rd);
+    buffer_EX_WB EX_WB_bufferInst(clock, regWrite, WAI, memRead, PC, readData1, ALUResult1, rd, out_regWrite, WAI2, memRead2, PC2, readData2, ALUResult2, out_rd);
     
     wire [1:0] sel;
     or(sel[1], memRead2, 0);
