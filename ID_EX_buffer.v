@@ -49,7 +49,7 @@ output reg out_wai;
 output reg out_memw;
 output reg out_memr;
 output reg out_alusrc;
-output reg out_[2:0] aluop;
+output reg [2:0] out_aluop;
 
   always @(negedge clock)
 begin
