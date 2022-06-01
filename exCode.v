@@ -354,8 +354,9 @@ module exCode(clock, memWrite, memRead, ALUSRC, ALUOP, rd1, rd2, imm, readData, 
    input memWrite, memRead, ALUSRC;
    input [2:0] ALUOP;
    input [31:0] rd1, rd2, imm;
-   output reg [31:0] readData, result;
-   output reg zero, neg;
+   output [31:0] readData;
+   output [31:0] result;
+   output zero, neg;
    reg [31:0] aluA;
 
    dataMem dataMemInst(clock, memRead, memWrite, rd1, rd2, readData);
