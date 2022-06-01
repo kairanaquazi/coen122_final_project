@@ -11,9 +11,3 @@ if(svpc) begin lhs=pci; end else begin lhs=rd1o; end
 if(inst[0]) begin imm=inst[21:0]; end else begin imm=inst[15:0]; end
 end
 endmodule
-
-0-9 unused
-10-15 rs2
-16-21 rs1
-22-27 rd
-28-31 opcode
