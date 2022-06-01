@@ -27,6 +27,16 @@ input [31:0] datain;
 output reg [31:0] dataout;
 reg [31:0] memory [6535:0];
 
+initial begin 
+memory[0] = 0;
+memory[1] = 4;
+memory[2] = 30;
+memory[3] = 19;
+memory[4] = 6;
+memory[5] = 10;
+end
+
+
 always @(posedge clock)
 begin
 // only write datain if the write signal is high
@@ -41,3 +51,4 @@ end
 
 end
 endmodule
+
