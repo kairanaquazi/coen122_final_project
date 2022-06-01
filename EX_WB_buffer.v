@@ -36,7 +36,7 @@ module buffer_EX_WB(clock, regWrite, WAI, memRead, PC, readData, ALUResult, rd, 
     output reg [31:0] out_readData;
     output reg [31:0] out_ALUResult;
     output reg [5:0] out_rd;
-    always @(posedge clock)
+    always @(negedge clock)
     begin
         out_regWrite = regWrite;
         out_WAI = WAI;
