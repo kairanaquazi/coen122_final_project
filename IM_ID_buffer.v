@@ -27,7 +27,7 @@ input [31:0] instruction;
 output reg [31:0] out_instruction;
 output reg [31:0] out_PC;
 
-always @(posedge clock)
+  always @(negedge clock)
 begin
 out_instruction = instruction;
 out_PC = PC;
