@@ -31,6 +31,12 @@ module regfile(
     output reg [31:0] tout
     );
 reg [31:0] data [63:0];
+
+initial begin
+    data[2] = 0;
+    data[3] = 5;
+end
+    
 always @(posedge clk) begin
 if(wrt==1) begin
 data[rd]=din;
