@@ -3,7 +3,7 @@
 `include "ID_EX_buffer.v"
 `include "control.v"
 
-module stage2(input clk, input [31:0] PC, input [31:0] instruction, input [31:0] writedata, input [5:0] rdi, output reg [31:0] out_imm, output reg [5:0] out_rd, output reg [31:0] out_rd1, output reg [31:0] out_rd2, output reg [31:0] out_PC, output reg out_brz, output reg out_brn, output reg out_j, output reg out_regw, output reg out_wai, output reg out_memw, output reg out_memr, output reg out_alusrc, output reg out_[2:0] aluop);
+module stage2(input clk, input [31:0] PC, input [31:0] instruction, input [31:0] writedata, input [5:0] rdi, output reg [31:0] out_imm, output reg [5:0] out_rd, output reg [31:0] out_rd1, output reg [31:0] out_rd2, output reg [31:0] out_PC, output reg out_brz, output reg out_brn, output reg out_j, output reg out_regw, output reg out_wai, output reg out_memw, output reg out_memr, output reg out_alusrc, output reg out_[2:0] out_aluop);
 
 wire svpc, brz, brn, j, wai, memw, memr, regw, alusrc;
 wire [2:0] aluop;
