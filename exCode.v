@@ -199,11 +199,15 @@ endmodule
 module mux31(neg, sel, A, B, out);
 
 input [1:0] sel;
+input neg;
 input [31:0] A;
 input [31:0] B;
-reg [31:0] temp;
+wire [31:0] temp;
+wire [31:0] temp1;
+wire [31:0] temp2;
 output [31:0] out;
 
+wire notneg;
 wire notsel1, notsel0, result1;
 wire [31:0] resulta;
 wire [31:0] resultnegb;
@@ -248,7 +252,107 @@ and(resulta[31],A[31],notsel1,notsel0);
 and(result1,1,notsel1,sel[0]);
 
 
-if(neg) begin temp=B; end else begin temp=A; end
+not(notneg, neg);
+
+and(temp1[0],neg,B[0]);
+and(temp1[1],neg,B[1]);
+and(temp1[2],neg,B[2]);
+and(temp1[3],neg,B[3]);
+and(temp1[4],neg,B[4]);
+and(temp1[5],neg,B[5]);
+and(temp1[6],neg,B[6]);
+and(temp1[7],neg,B[7]);
+and(temp1[8],neg,B[8]);
+and(temp1[9],neg,B[9]);
+and(temp1[10],neg,B[10]);
+and(temp1[11],neg,B[11]);
+and(temp1[12],neg,B[12]);
+and(temp1[13],neg,B[13]);
+and(temp1[14],neg,B[14]);
+and(temp1[15],neg,B[15]);
+and(temp1[16],neg,B[16]);
+and(temp1[17],neg,B[17]);
+and(temp1[18],neg,B[18]);
+and(temp1[19],neg,B[19]);
+and(temp1[20],neg,B[20]);
+and(temp1[21],neg,B[21]);
+and(temp1[22],neg,B[22]);
+and(temp1[23],neg,B[23]);
+and(temp1[24],neg,B[24]);
+and(temp1[25],neg,B[25]);
+and(temp1[26],neg,B[26]);
+and(temp1[27],neg,B[27]);
+and(temp1[28],neg,B[28]);
+and(temp1[29],neg,B[29]);
+and(temp1[30],neg,B[30]);
+and(temp1[31],neg,B[31]);
+
+
+and(temp2[0],notneg,A[0]);
+and(temp2[1],notneg,A[1]);
+and(temp2[2],notneg,A[2]);
+and(temp2[3],notneg,A[3]);
+and(temp2[4],notneg,A[4]);
+and(temp2[5],notneg,A[5]);
+and(temp2[6],notneg,A[6]);
+and(temp2[7],notneg,A[7]);
+and(temp2[8],notneg,A[8]);
+and(temp2[9],notneg,A[9]);
+and(temp2[10],notneg,A[10]);
+and(temp2[11],notneg,A[11]);
+and(temp2[12],notneg,A[12]);
+and(temp2[13],notneg,A[13]);
+and(temp2[14],notneg,A[14]);
+and(temp2[15],notneg,A[15]);
+and(temp2[16],notneg,A[16]);
+and(temp2[17],notneg,A[17]);
+and(temp2[18],notneg,A[18]);
+and(temp2[19],notneg,A[19]);
+and(temp2[20],notneg,A[20]);
+and(temp2[21],notneg,A[21]);
+and(temp2[22],notneg,A[22]);
+and(temp2[23],notneg,A[23]);
+and(temp2[24],notneg,A[24]);
+and(temp2[25],notneg,A[25]);
+and(temp2[26],notneg,A[26]);
+and(temp2[27],notneg,A[27]);
+and(temp2[28],notneg,A[28]);
+and(temp2[29],notneg,A[29]);
+and(temp2[30],notneg,A[30]);
+and(temp2[31],notneg,A[31]);
+
+or(temp[0],temp1[0],temp2[0]);
+or(temp[1],temp1[1],temp2[1]);
+or(temp[2],temp1[2],temp2[2]);
+or(temp[3],temp1[3],temp2[3]);
+or(temp[4],temp1[4],temp2[4]);
+or(temp[5],temp1[5],temp2[5]);
+or(temp[6],temp1[6],temp2[6]);
+or(temp[7],temp1[7],temp2[7]);
+or(temp[8],temp1[8],temp2[8]);
+or(temp[9],temp1[9],temp2[9]);
+or(temp[10],temp1[10],temp2[10]);
+or(temp[11],temp1[11],temp2[11]);
+or(temp[12],temp1[12],temp2[12]);
+or(temp[13],temp1[13],temp2[13]);
+or(temp[14],temp1[14],temp2[14]);
+or(temp[15],temp1[15],temp2[15]);
+or(temp[16],temp1[16],temp2[16]);
+or(temp[17],temp1[17],temp2[17]);
+or(temp[18],temp1[18],temp2[18]);
+or(temp[19],temp1[19],temp2[19]);
+or(temp[20],temp1[20],temp2[20]);
+or(temp[21],temp1[21],temp2[21]);
+or(temp[22],temp1[22],temp2[22]);
+or(temp[23],temp1[23],temp2[23]);
+or(temp[24],temp1[24],temp2[24]);
+or(temp[25],temp1[25],temp2[25]);
+or(temp[26],temp1[26],temp2[26]);
+or(temp[27],temp1[27],temp2[27]);
+or(temp[28],temp1[28],temp2[28]);
+or(temp[29],temp1[29],temp2[29]);
+or(temp[30],temp1[30],temp2[30]);
+or(temp[31],temp1[31],temp2[31]);
 
 negateA negateB_call(temp,negativeB);
 
