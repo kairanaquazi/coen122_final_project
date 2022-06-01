@@ -12,7 +12,7 @@ wire [31:0] pco, lhs, rd2o, imm;
 
 control control_instance(instruction, svpc, brz, brn, j, wai, memw, memr, regw, alusrc, aluop);
 
-idecode idecode_instance(clk, svpc, PC, instruction, regw, writedata, rdi, pco, lhs, rd2o, imm, output reg [5:0] rdo);
+idecode idecode_instance(clk, svpc, PC, instruction, regw, writedata, rdi, pco, lhs, rd2o, imm, rdo);
 
 buffer_ID_EX buffer_ID_EX_instance(clk, imm, rdo, lhs, rd2o, pco, out_imm, out_rd, out_rd1, out_rd2, out_PC, brz, brn, j, regw, wai, memw, memr, alusrc, aluop, out_brz, out_brn, out_j, out_regw, out_wai, out_memw, out_memr, out_alusrc, out_aluop);
 
