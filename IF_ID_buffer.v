@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module buffer_IM_ID(clock, PC, instruction);
+module buffer_IM_ID(clock, PC, instruction, out_instruction, out_PC);
 input clock;
 input [31:0] PC;
 input [31:0] instruction;
