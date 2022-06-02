@@ -434,7 +434,10 @@ if(~add&neg&~sub) begin out=~B+1; end
 if(~add&~neg&sub) begin out=B-A; end
 if(add&neg&sub) begin out=A; end
 if(out==0) begin Z=1; end
-if(out[31]==1) begin N=1; end
+if(out!=0) begin Z=0; end
+if(out<0) begin N=1; end
+if(out>=0) begin N=0; end
+end
 end
 
 endmodule
