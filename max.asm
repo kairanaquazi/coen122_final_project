@@ -1,5 +1,3 @@
-SUB  x0, x0, x0
-NOP
 ADDi x4, x0, -65535
 ADD  x5, x2, x3
 NOP
