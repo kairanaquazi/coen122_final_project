@@ -29,6 +29,11 @@ class Mapper:
         for i in x:
             print(f"data[{c}]=32'b{i};")
             c+=1
+        with open(fpout1,"w") as f:
+            c=0
+            for i in x:
+                f.write(f"data[{c}]=32'b{i};\n")
+                c+=1
 
     def exec(self, line: str) -> int:
         line = line.split(" ", 1)
