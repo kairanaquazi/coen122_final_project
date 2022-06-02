@@ -425,37 +425,19 @@ or(out[31],resulta[31],resultnegb[31],0);
 
 endmodule
 //////////////////////////////////////////////////////////////////////////////////
-module alu(A,B,add,inc,neg,sub,out,Z,N);
- 
-input [31:0] A;
-input [31:0] B;
-input add,inc,neg,sub;
-output [31:0] out;
-output Z,N;
 
-//Makes inc irrelevant
-and(inc, add, neg, sub);
+module alu(input [31:0] A, input [31:0], B, input add, input inc, input neg, input sub, output [31:0] out, output Z, output N);
 
-wire not_sub;
-wire [1:0] select;
-wire [31:0] result_21mux;
-wire [31:0] result_31mux;
-
-not(not_sub, sub);
-and(select[0], inc, not_sub);
-nor(select[1], add, inc);
-mux31 mux31_call(neg, select, A, B, result_31mux);
-
-mux21 mux21_call(neg, B, result_21mux);
-
-add32 add32_final(.A(result_31mux),.B(result_21mux),.S(out));
-
-assign N = out[31];
-
-nor(Z, out[0], out[1], out[2], out[3], out[4], out[5], out[6], out[7], out[8], out[9], out[10], out[11], out[12], out[13], out[14], out[15], out[16], out[17], out[18], out[19], out[20], out[21], out[22], out[23], out[24], out[25], out[26], out[27], out[28], out[29], out[30], out[31]);
+always @(A,B,add,inc,neg,sub) begin
+if(add&~sub&~neg) begin out=A+B; end
+if(~add&neg&~sub) begin out=~B+1; end
+if(~add&~neg&sub) begin out=B-A; end
+if(add&neg&sub) begin out=A; end
+if(out==0) begin Z=1; end
+if(out[31]==1) begin N=1; end
+end
 
 endmodule
-
 
 module exCode(clock, memWrite, memRead, ALUSRC, ALUOP, rd1, rd2, imm, readData, result, zero, neg);
    input clock;
