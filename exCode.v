@@ -24,7 +24,7 @@ input clock, read, write;
 input [31:0] address;
 input [31:0] datain;
 output reg [31:0] dataout;
-reg [31:0] memory [6535:0];
+reg [31:0] memory [255:0];
 
 initial begin 
 memory[0] = 0;
@@ -74,7 +74,7 @@ wire cout10, cout11, cout12, cout13, cout14, cout15, cout16, cout17, cout18, cou
 wire cout20, cout21, cout22, cout23, cout24, cout25, cout26, cout27, cout28, cout29;
 wire cout30, cout31;
 
-add1 add1_0(A[0], B[0], 0, S[0], cout0);
+add1 add1_0(A[0], B[0], 1'b0, S[0], cout0);
 add1 add1_1(A[1], B[1], cout0, S[1], cout1);
 add1 add1_2(A[2], B[2], cout1, S[2], cout2);
 add1 add1_3(A[3], B[3], cout2, S[3], cout3);
@@ -469,7 +469,7 @@ module exCode(clock, memWrite, memRead, ALUSRC, ALUOP, rd1, rd2, imm, readData, 
 
    dataMem dataMemInst(clock, memRead, memWrite, rd1, rd2, readData);
    
-   alu aluInst(aluA, rd1, ALUOP[2], 0, ALUOP[1], ALUOP[0], result, zero, neg);
+   alu aluInst(aluA, rd1, ALUOP[2], 1'b0, ALUOP[1], ALUOP[0], result, zero, neg);
    
    always @(posedge clock) begin
    if(ALUSRC) begin 
