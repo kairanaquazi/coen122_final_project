@@ -2,10 +2,12 @@
 `include "pc.v"
 `include "imem.v"
 
-module ifetch(input clk, input [5:0] rd1, input brz, input brn, input j, output reg [31:0] pco, output reg [31:0] inst) ;
+module ifetch(input clk, input [31:0] rd1, input brz, input brn, input j, output [31:0] pco, output [31:0] inst) ;
 reg [31:0] pci;
+//reg [31:0] tempInst;
 pc upc(pci,pco);
-imem uimem(clk, pci, 0, inst);
+imem uimem(clk, pci, inst);
+
 initial begin pci=0; end
 
 always @(posedge clk) begin
