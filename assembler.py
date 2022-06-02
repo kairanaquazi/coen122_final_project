@@ -1,12 +1,14 @@
 import click
+import sys
 
 
 class Mapper:
     def __init__(self):
         pass
 
-    def parser(self, fpin: str, fpout) -> None:
-        with open(fpin, "r") as fp, open(fpout, "wb") as fpout:
+    def parser(self, fpin: str, fpout1) -> None:
+        l = []
+        with open(fpin, "r") as fp, open(fpout1, "wb") as fpout:
             while line := fp.readline():
                 if line.startswith("//"):
                     continue
@@ -18,6 +20,13 @@ class Mapper:
                 print()
                 print(x)
                 fpout.write(x.to_bytes(4, "big"))
+                l.append(x)
+        x = []
+        for i in l:
+            j = bin(i)[2:]
+            x.append((32 - len(j)) * "0" + j)
+        for i in x:
+            print(i)
 
     def exec(self, line: str) -> int:
         line = line.split(" ", 1)
