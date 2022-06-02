@@ -19,3 +19,4 @@ SUB x7, x5, x2
 BRZ x9
 NOP
 NOP
+ADDi x4, x4, 0
