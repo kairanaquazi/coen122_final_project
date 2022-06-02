@@ -22,8 +22,8 @@
 
 module regfile(
     input [5:0] rd,
-    input [5:0] rt,
     input [5:0] rs,
+    input [5:0] rt,
     input [31:0] din,
     input clk,
     input wrt,
@@ -33,6 +33,8 @@ module regfile(
 reg [31:0] data [63:0];
 
 initial begin
+    data[0] = 0;
+    data[1] = 9; //unused
     data[2] = 0;
     data[3] = 5;
 end
@@ -44,4 +46,15 @@ end
 sout=data[rs];
 tout=data[rt];
 end
+
+//always @(negedge clk) begin
+//sout=data[rs];
+//tout=data[rt];
+//end
+
+//always @(posedge clk) begin
+//if(wrt==1) begin
+//data[rd]=din;
+//end
+//end
 endmodule
