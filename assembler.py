@@ -25,8 +25,10 @@ class Mapper:
         for i in l:
             j = bin(i)[2:]
             x.append((32 - len(j)) * "0" + j)
+        c=0
         for i in x:
-            print(i)
+            print(f"data[{c}]=32'b{i};")
+            c+=1
 
     def exec(self, line: str) -> int:
         line = line.split(" ", 1)
