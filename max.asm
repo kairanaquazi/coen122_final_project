@@ -22,7 +22,7 @@ ADDi x4, x4, 0
 WAI x20
 NOP
 NOP
-ADDi x20, x20, 3
+ADDi x20, x20, 7
 NOP
 NOP
 J x20
