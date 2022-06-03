@@ -18,6 +18,6 @@ NOP
 SUB  x7, x5, x2
 NOP
 NOP
-BRZ  x9
+BRN  x9
 NOP
 NOP
