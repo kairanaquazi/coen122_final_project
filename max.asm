@@ -7,8 +7,6 @@ SVPC x10, 10
 LD x6, x2
 NOP
 SUB  x7, x6, x4
-NOP
-NOP
 BRN  x10
 NOP
 NOP
@@ -16,8 +14,6 @@ ADD  x4, x6, x0
 ADDi x2, x2, 1
 NOP
 SUB  x7, x5, x2
-NOP
-NOP
 BRN  x9
 NOP
 NOP
