@@ -21,3 +21,7 @@ NOP
 BRN  x9
 NOP
 NOP
+Addi x4, x4, 0
+NOP
+NOP
+NOP
