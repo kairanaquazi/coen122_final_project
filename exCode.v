@@ -1,4 +1,5 @@
 `timescale 1ns / 1ps
+`include "mux2.v"
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
 // Engineer: 
@@ -27,12 +28,14 @@ output reg [31:0] dataout;
 reg [31:0] memory [255:0];
 
 initial begin 
-memory[0] = 0;
-memory[1] = 4;
-memory[2] = 30;
-memory[3] = 19;
-memory[4] = 6;
-memory[5] = 10;
+//memory[0] = 11;
+//memory[1] = 4;
+memory[2] = 3;
+memory[3] = -4;
+memory[4] = 5;
+memory[5] = 2;
+memory[6] = 20;
+
 end
 
 
@@ -196,7 +199,7 @@ and(out[31],notsel,B[31]);
 
 endmodule
 //////////////////////////////////////////////////////////////////////////////////
-module mux31(neg, sel, A, B, out);
+module mux31(neg, sel, A, B, out); //
 
 input [1:0] sel;
 input neg;
@@ -425,22 +428,55 @@ or(out[31],resulta[31],resultnegb[31],0);
 
 endmodule
 //////////////////////////////////////////////////////////////////////////////////
+module alu(A,B,add,inc,neg,sub,out,Z,N);
+ 
+input [31:0] A;
+input [31:0] B;
+input add,inc,neg,sub;
+output [31:0] out;
+output Z,N;
 
-module alu(input [31:0] A, input [31:0], B, input add, input inc, input neg, input sub, output [31:0] out, output Z, output N);
 
-always @(A,B,add,inc,neg,sub) begin
-if(add&~sub&~neg) begin out=A+B; end
-if(~add&neg&~sub) begin out=~B+1; end
-if(~add&~neg&sub) begin out=B-A; end
-if(add&neg&sub) begin out=A; end
-if(out==0) begin Z=1; end
-if(out!=0) begin Z=0; end
-if(out<0) begin N=1; end
-if(out>=0) begin N=0; end
-end
-end
+and(inc, add, neg, sub); //Makes inc irrelevant
+
+wire not_sub; //will hold !sub
+wire [1:0] select; //selector for mux31
+wire [31:0] result_21mux; //holds mux21 output
+wire [31:0] result_31mux; //holds mux31 output
+
+not(not_sub, sub); //makes not_sub hold !sub
+and(select[0], inc, not_sub); //sets select[0] to 0 always
+nor(select[1], add, inc); //sets select[1] to 1 if add is 0
+                            //select will be 10 if add is 0 and 00 if add is 1
+mux31 mux31_call(neg, select, A, B, result_31mux); //on sub, inputs are 0, 10, a, b
+
+mux21 mux21_call(neg, B, result_21mux); 
+
+add32 add32_final(.A(result_31mux),.B(result_21mux),.S(out));
+
+assign N = out[31];
+
+nor(Z, out[0], out[1], out[2], out[3], out[4], out[5], out[6], out[7], out[8], out[9], out[10], out[11], out[12], out[13], out[14], out[15], out[16], out[17], out[18], out[19], out[20], out[21], out[22], out[23], out[24], out[25], out[26], out[27], out[28], out[29], out[30], out[31]);
 
 endmodule
+
+
+//module alu(input [31:0] A, input [31:0] B, input add, input inc, input neg, input sub, output reg [31:0] out, output reg Z, output reg N);
+
+//always @(A,B,add,inc,neg,sub) begin
+//if(add&~sub&~neg) begin out=A+B; end
+//if(~add&neg&~sub) begin out=~B+1; end
+//if(~add&~neg&sub) begin out=B-A; end
+//if(add&neg&sub) begin out=A; end
+//if(out==0) begin Z=1; end
+//if(out!=0) begin Z=0; end
+//if(out<0) begin N=1; end
+//if(out>=0) begin N=0; end
+//end
+
+
+//endmodule
+
 
 module exCode(clock, memWrite, memRead, ALUSRC, ALUOP, rd1, rd2, imm, readData, result, zero, neg);
    input clock;
@@ -450,19 +486,19 @@ module exCode(clock, memWrite, memRead, ALUSRC, ALUOP, rd1, rd2, imm, readData, 
    output [31:0] readData;
    output [31:0] result;
    output zero, neg;
-   reg [31:0] aluA;
+   wire [31:0] aluA;
 
    dataMem dataMemInst(clock, memRead, memWrite, rd1, rd2, readData);
-   
+   mux2 mux2Inst(rd2, imm, ALUSRC, aluA);
    alu aluInst(aluA, rd1, ALUOP[2], 1'b0, ALUOP[1], ALUOP[0], result, zero, neg);
    
-   always @(posedge clock) begin
-   if(ALUSRC) begin 
-   aluA=imm; 
-   end else begin 
-   aluA=rd2; 
-   end
-   end
+//   always @(posedge clock) begin
+//   if(ALUSRC) begin 
+//   aluA=imm; 
+//   end else begin 
+//   aluA=rd2; 
+//   end
+//   end
    
    
 
